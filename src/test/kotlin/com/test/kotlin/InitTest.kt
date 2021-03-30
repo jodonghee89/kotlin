@@ -2,6 +2,10 @@ package com.test.kotlin
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
+val log: Logger = LoggerFactory.getLogger("com.test.kotlin")
 
 class InitTest {
 
@@ -26,5 +30,25 @@ class InitTest {
 
         assertThat("${intAry[0]}").isEqualTo("1")
         assertThat(intAryInNull[2]).isEqualTo(null)
+
+        Person("superman", 15)
+        Person("goodman", 20)
+        Person("zzangman")
+    }
+}
+
+class Person(var name: String, var age: Int) {
+    init {
+        print()
+    }
+
+    constructor(name: String) : this(name, 30) {
+        log.info("보조 생성자 수행 여부?")
+        print()
+    }
+
+    fun print() {
+        this.name += " 님"
+        log.info("${this.name} 의 나이는 ${this.age} 입니다")
     }
 }
